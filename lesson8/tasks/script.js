@@ -84,3 +84,55 @@
 //     }
 // };
 // ========================================================
+let nameInput = document.form1.nameInput;
+let surnameInput = document.form1.surnameInput;
+let phoneInput = document.form1.phoneInput;
+let emailInput = document.form1.emailInput;
+let firmInput = document.form1.firmInput;
+let divisionInput = document.form1.divisionInput;
+let DofBInput = document.form1.DofBInput;
+let submitButton = document.getElementById("submitButton");
+let i = JSON.parse(localStorage.getItem("contacts"));
+let body = document.getElementsByTagName("body");
+if(!i){
+    i=0;
+}
+submitButton.onclick = () => {
+    i++;
+    let contact = {
+        name: nameInput.value,
+        surname: surnameInput.value,
+        phone: phoneInput.value,
+        email: emailInput.value,
+        firm: firmInput.value,
+        division: divisionInput.value,
+        DofB: DofBInput.value
+    };
+  localStorage.setItem(`contact${i}`,JSON.stringify(contact));
+  localStorage.setItem("contacts",JSON.stringify(i));
+  let contactDiv = document.createElement("div");
+  contactDiv.id = i;
+  contactDiv.style.display = "flex";
+  let nameField = document.createElement('p');
+  let surnameField = document.createElement('p');
+  let phoneField = document.createElement('p');
+  let emailField = document.createElement('p');
+  let firmField = document.createElement('p');
+  let divisionField = document.createElement('p');
+  let DofBField = document.createElement('p');
+  nameField.innerText = ("Name:"+contact.name);
+  surnameField.innerText = ("||Surname:"+contact.surname);
+  phoneField.innerText = ("||Phone:"+contact.phone);
+  emailField.innerText = ("||Email:"+contact.email);
+  firmField.innerText = ("||Firm:"+contact.firm);
+  divisionField.innerText = ("||Division:"+contact.division);
+  DofBField.innerText = ("||Date of Birth:"+contact.DofB);
+  contactDiv.appendChild(nameField);
+  contactDiv.appendChild(surnameField);
+  contactDiv.appendChild(phoneField);
+  contactDiv.appendChild(emailField);
+  contactDiv.appendChild(firmField);
+  contactDiv.appendChild(divisionField);
+  contactDiv.appendChild(DofBField);
+  document.body.appendChild(contactDiv);
+};
