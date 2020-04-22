@@ -93,9 +93,51 @@ let divisionInput = document.form1.divisionInput;
 let DofBInput = document.form1.DofBInput;
 let submitButton = document.getElementById("submitButton");
 let i = JSON.parse(localStorage.getItem("contacts"));
-let body = document.getElementsByTagName("body");
 if(!i){
     i=0;
+}
+if ( i!==0 ){
+    for (let y =1;y<=i;y++){
+            let contact = JSON.parse(localStorage.getItem(`contact${y}`));
+            let contactDiv = document.createElement("div");
+          contactDiv.id = y;
+          contactDiv.style.display = "flex";
+          let nameField = document.createElement('p');
+          let surnameField = document.createElement('p');
+          let phoneField = document.createElement('p');
+          let emailField = document.createElement('p');
+          let firmField = document.createElement('p');
+          let divisionField = document.createElement('p');
+          let DofBField = document.createElement('p');
+          let editButton = document.createElement('button');
+          let deleteButton = document.createElement('button');
+          nameField.innerText = ("Name:"+contact.name);
+          surnameField.innerText = ("||Surname:"+contact.surname);
+          phoneField.innerText = ("||Phone:"+contact.phone);
+          emailField.innerText = ("||Email:"+contact.email);
+          firmField.innerText = ("||Firm:"+contact.firm);
+          divisionField.innerText = ("||Division:"+contact.division);
+          DofBField.innerText = ("||Date of Birth:"+contact.DofB);
+          editButton.type = "submit";
+          deleteButton.type = "submit";
+          editButton.innerText = "Edit";
+          deleteButton.innerText = "Delete";
+          contactDiv.appendChild(nameField);
+          contactDiv.appendChild(surnameField);
+          contactDiv.appendChild(phoneField);
+          contactDiv.appendChild(emailField);
+          contactDiv.appendChild(firmField);
+          contactDiv.appendChild(divisionField);
+          contactDiv.appendChild(DofBField);
+          contactDiv.appendChild(editButton);
+          contactDiv.appendChild(deleteButton);
+          document.body.appendChild(contactDiv);
+          deleteButton.onclick = (ev)=>{
+              let deletedContact = deleteButton.parentNode;
+            deleteButton.parentNode.innerHTML = "";
+            localStorage.removeItem(`contact${deletedContact.id}`);
+          };
+    }
 }
 submitButton.onclick = () => {
     i++;
@@ -120,6 +162,8 @@ submitButton.onclick = () => {
   let firmField = document.createElement('p');
   let divisionField = document.createElement('p');
   let DofBField = document.createElement('p');
+  let editButton = document.createElement('button');
+  let deleteButton = document.createElement('button');
   nameField.innerText = ("Name:"+contact.name);
   surnameField.innerText = ("||Surname:"+contact.surname);
   phoneField.innerText = ("||Phone:"+contact.phone);
@@ -127,6 +171,10 @@ submitButton.onclick = () => {
   firmField.innerText = ("||Firm:"+contact.firm);
   divisionField.innerText = ("||Division:"+contact.division);
   DofBField.innerText = ("||Date of Birth:"+contact.DofB);
+  editButton.type = "submit";
+  deleteButton.type = "submit";
+  editButton.innerText = "Edit";
+  deleteButton.innerText = "Delete";
   contactDiv.appendChild(nameField);
   contactDiv.appendChild(surnameField);
   contactDiv.appendChild(phoneField);
@@ -134,5 +182,7 @@ submitButton.onclick = () => {
   contactDiv.appendChild(firmField);
   contactDiv.appendChild(divisionField);
   contactDiv.appendChild(DofBField);
+  contactDiv.appendChild(editButton);
+  contactDiv.appendChild(deleteButton);
   document.body.appendChild(contactDiv);
 };
